@@ -1,5 +1,5 @@
 import { getScopedI18n } from "@/components/locales/server";
-import { AboutPanel } from "@/components/about-panel";
+import { AboutPanel } from "./panel";
 import { BiHappyHeartEyes } from "react-icons/bi";
 import { FaLaptopCode } from "react-icons/fa";
 import { LuHandMetal } from "react-icons/lu";
@@ -15,9 +15,9 @@ export default async function AboutPage({ params: { locale } }: Props) {
   const aboutT = await getScopedI18n("about");
 
   return (
-    <div className="flex-col gap-12">
+    <div className="flex-col gap-12 w-[100vw]">
       <h1 className="font-bold text-5xl py-[5vw]">Metallic Shout</h1>
-      <div className="flex-col gap-16">
+      <div className="flex-col gap-16 w-full">
         <AboutPanel gradient="to-about-panel-1" text={aboutT("text1")}>
           {({ className }: { className?: string }) => (
             <BiHappyHeartEyes

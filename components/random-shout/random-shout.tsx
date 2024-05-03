@@ -28,7 +28,7 @@ export const RandomShout: React.FC<Props> = ({
   useUpdateEffect(() => {
     if (loading || error) return;
     setAtom(data?.metals.random.styled);
-  }, [loading, error]);
+  }, [data, loading, error]);
 
   return (
     <>

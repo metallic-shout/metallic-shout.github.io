@@ -1,5 +1,5 @@
 import { Board } from "./board";
-import { string2DoubleStrucks } from "@/src/string2double-struck";
+import { string2DoubleStrucks } from "../string2double-struck";
 
 const prefix = string2DoubleStrucks("Punch  out  the  ");
 
