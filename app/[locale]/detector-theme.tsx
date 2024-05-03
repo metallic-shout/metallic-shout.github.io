@@ -1,30 +1,29 @@
 "use client";
 
-import { useMemo, useState, useCallback, ReactNode } from "react";
-import type { IconType } from "react-icons";
+import { useState, useCallback, ReactNode, useEffect } from "react";
 
 interface Props {
   children: [ReactNode, ReactNode];
 }
 
-type Theme = "dark" | "light";
+type Theme = "dark" | "light" | "loading";
 
 const toggleThemeString = (current: Theme) => {
   return current === "dark" ? "light" : "dark";
 };
 
 const useSwitchTheme = () => {
-  const initTheme = useMemo(() => {
-    if (typeof localStorage === "undefined") return "dark";
-    return localStorage.getItem("theme") ?? "dark";
-  }, []) as Theme;
-  const [theme, setTheme] = useState<Theme>(initTheme);
+  const [theme, setTheme] = useState<Theme>("loading");
   const switchTheme = useCallback(() => {
     setTheme((current) => {
       const next = toggleThemeString(current);
       window.localStorage.setItem("theme", next);
       return next;
     });
+  }, []);
+  useEffect(() => {
+    const initTheme = (localStorage.getItem("theme") ?? "dark") as Theme;
+    setTheme(initTheme);
   }, []);
   return { theme, switchTheme };
 };
