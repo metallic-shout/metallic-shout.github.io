@@ -30,7 +30,7 @@
 }
 
 body {
-  @apply text-fg-1 bg-backest;
+  @apply text-fg-1 bg-backest overflow-x-hidden;
 }
 
 dialog{
@@ -38,7 +38,7 @@ dialog{
 }
 
 body:has(dialog[open]){
-  @apply overflow-hidden;
+  /* @apply overflow-hidden; */
 }
 
 * {
