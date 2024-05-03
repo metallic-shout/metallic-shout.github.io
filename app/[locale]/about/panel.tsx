@@ -1,4 +1,3 @@
-"use server";
 import type { IconType } from "react-icons";
 
 interface Props {
