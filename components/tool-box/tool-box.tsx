@@ -2,7 +2,7 @@
 import { FaLocationArrow } from "react-icons/fa";
 import { useRef, useCallback } from "react";
 import Link from "next/link";
-import { useWithDialog } from "@/components/dialog";
+import { useWithDialog } from "./dialog";
 import { ShoutSVG } from "@/components/shout-svg";
 
 const toggleBoolString = (value: string) => {

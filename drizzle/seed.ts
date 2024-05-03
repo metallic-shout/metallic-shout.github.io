@@ -1,7 +1,7 @@
 import * as Schema from "./schema";
 import { dbConnection } from "./db";
-import { string2DoubleStrucks } from "@/src/string2double-struck";
-import { metalMap } from "@/src/metal-map";
+import { string2DoubleStrucks } from "./seed-parts/string2double-struck";
+import { metalMap } from "./seed-parts/metal-atom-map";
 import { NewStyledMetalAtoms, NewMetalAtoms } from "./schema";
 
 (async () => {
