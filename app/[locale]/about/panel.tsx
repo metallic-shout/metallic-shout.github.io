@@ -18,7 +18,7 @@ to-90%
 export const AboutPanel = ({ children: Child, text, gradient }: Props) => {
   return (
     <>
-      <div className="flex-col h-fit min-h-[50vh] w-full overflow-hidden">
+      <div className="flex-col h-fit min-h-[50vh] w-full">
         <div
           className={`
             h-full

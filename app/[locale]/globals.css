@@ -57,3 +57,11 @@ ul{
 p {
   @apply w-max h-max;
 }
+
+main::-webkit-scrollbar{
+  @apply bg-panel w-1 rounded-sm;
+}
+
+main::-webkit-scrollbar-thumb{
+  @apply bg-fg-2-2;
+}
