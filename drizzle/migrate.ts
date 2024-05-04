@@ -1,4 +1,3 @@
-import { config } from "dotenv";
 import { migrate as pgMigrate } from "drizzle-orm/postgres-js/migrator";
 import { migrate as vercelMigrate } from "drizzle-orm/vercel-postgres/migrator";
 import { VercelPgDatabase } from "drizzle-orm/vercel-postgres";
@@ -16,7 +15,7 @@ type Schema = typeof schema;
     });
     return;
   }
-  await pgMigrate(dbConnection.db as PostgresJsDatabase<Schema>, {
+  await pgMigrate(dbConnection.db as unknown as PostgresJsDatabase<Schema>, {
     migrationsFolder: "./drizzle/dist",
   });
   dbConnection.close();
