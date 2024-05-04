@@ -36,7 +36,7 @@ export default function RootLayout({ children, params: { locale } }: Props) {
             </DetectorTheme>
           </TopBar>
           <WithToolBox />
-          {children}
+          <main className="overflow-y-auto overflow-x-hidden">{children}</main>
         </Provider>
       </body>
     </html>

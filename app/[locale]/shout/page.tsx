@@ -17,7 +17,7 @@ export default async function ShoutPage({ params: { locale } }: Props) {
 
   return (
     <Provider>
-      <main className="flex-wrap w-screen h-screen">
+      <div className="flex-wrap w-screen h-full">
         <div className="mx-1/4 max-w-xl max-h-56 px-8">
           <RandomShout>
             <RxUpdate />
@@ -31,7 +31,7 @@ export default async function ShoutPage({ params: { locale } }: Props) {
             <ErrorTopbar>{copyT("error")}</ErrorTopbar>
           </CopyButton>
         </div>
-      </main>
+      </div>
     </Provider>
   );
 }

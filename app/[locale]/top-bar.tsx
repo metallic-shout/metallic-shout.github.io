@@ -23,7 +23,7 @@ export const TopBar = ({ currentLocale, children }: Props) => {
     [changeLocale]
   );
   return (
-    <div className="fixed z-20 justify-start w-screen h-fit py-3 bg-panel pl-10">
+    <div className="z-20 justify-start w-screen h-fit py-3 bg-panel pl-10">
       <h1 className="bold text-3xl whitespace-nowrap">Metallic shout</h1>
       <div className="grow justify-end mr-5">
         <div className="h-full">{children}</div>
