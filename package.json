@@ -15,8 +15,9 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.13.0",
     "@nuxt/eslint-config": "^1.13.0",
+    "@nuxt/kit": "^4.3.0",
+    "@types/node": "^25.1.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.8.1",
