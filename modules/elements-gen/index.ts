@@ -3,7 +3,10 @@ import { addTemplate, createResolver, defineNuxtModule, useLogger } from '@nuxt/
 import { string2DoubleStrucks } from './string2double-struck';
 import ELEMENTS from './elements.source';
 
-// ELEMENTS から「元素名 -> ダブルストラック体」のマップを作成
+/**
+ * ELEMENTS から「元素名 -> ダブルストラック体」のマップを作成する。
+ * @returns 元素名 -> ダブルストラック体 のマップ。
+ */
 const buildMap = () => {
   if (!Array.isArray(ELEMENTS)) {
     throw new Error(`[elements-gen] ELEMENTS must be an array.`);
@@ -21,21 +24,34 @@ const buildMap = () => {
   return map;
 };
 
-// Nuxt モジュールとして登録
+/**
+ * Nuxt モジュールとして登録。
+ */
 export default defineNuxtModule({
   meta: {
     name: 'elements-gen',
     configKey: 'elementsGen',
   },
   defaults: {},
+  /**
+   * モジュールの初期化処理。
+   * @param _ ユーザー設定（未使用）。
+   * @param nuxt Nuxt のランタイムコンテキスト。
+   */
   setup(_, nuxt) {
     // モジュール用のロガーと resolver を準備
     const logger = useLogger('elements-gen');
     const { resolve } = createResolver(import.meta.url);
 
-    // ビルド時に JSON を生成して .nuxt 配下へ出力
+    /**
+     * ビルド時に JSON を生成して .nuxt 配下へ出力する。
+     */
     addTemplate({
       filename: 'elements/elements.generated.json',
+      /**
+       * 生成する JSON の内容を返す。
+       * @returns JSON 文字列。
+       */
       getContents: async () => {
         const map = buildMap();
         const json = JSON.stringify(map, null, 2);
