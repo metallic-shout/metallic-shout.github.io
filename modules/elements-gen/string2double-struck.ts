@@ -1,15 +1,21 @@
 import { err, ok, type IError, type Result } from '../../shared/result-type';
 
+/**
+ * 入力にアルファベット以外が含まれている場合に返すエラー。
+ */
 class ArgStringNotAlphabetError implements IError {
   kind = 'ArgStringNotAlphabetError';
   message = 'The arg is not only alphabet.';
 }
 
-// double-struck A
+/**
+ * ダブルストラック体 "A" の Unicode code point。
+ */
 const base = 0x1d538;
 
-// valueはUTF-16の二重線文字
-// 特殊な数学記号はUnicodeがずれるため、別途Mapを用意
+/**
+ * Unicode で連続しない位置を補正するための上書き表。
+ */
 const jumps = {
   2: 'ℂ',
   7: 'ℍ',
@@ -20,14 +26,26 @@ const jumps = {
   25: 'ℤ',
 } as Record<number, string | undefined>;
 
-// 大文字小文字合わせての二重線文字取得
+/**
+ * A-Z と a-z に対応するダブルストラック体の配列。
+ */
 const doubleStrucks = Array.from(Array(52).keys()).map(
   (e) => jumps[e] ?? String.fromCodePoint(e + base),
 );
 
+/**
+ * 'A' の Unicode code point。
+ */
 const codeUpperA = 0x41;
+/**
+ * 'a' の Unicode code point。
+ */
 const codeLowera = 0x61;
 
+/**
+ * 通常のアルファベットからダブルストラック体への変換マップを作成する。
+ * @returns 変換用の文字マップ。
+ */
 const makeCharTransMap = () => {
   // 各通常アルファベットのコードポイント取得
   const base = Array.from(Array(26).keys());
@@ -40,12 +58,26 @@ const makeCharTransMap = () => {
   return new Map(pairs);
 };
 
+/**
+ * 文字変換の参照テーブル。
+ */
 const charTransMap = makeCharTransMap();
 
+/**
+ * 文字列を 1 文字ずつの配列に分割する。
+ * @param target 分割対象の文字列。
+ * @returns 1 文字ずつに分割された配列。
+ */
 const string2chars = (target: string) => {
   return target.split('');
 };
 
+/**
+ * 英字文字列をダブルストラック体へ変換する。
+ * アルファベット以外が含まれる場合はエラーを返す。
+ * @param target 変換対象の英字文字列。
+ * @returns 変換結果。成功時は ok、失敗時は err。
+ */
 export const string2DoubleStrucks = (target: string): Result<string, ArgStringNotAlphabetError> => {
   const chars = string2chars(target);
   const isOnlyAlphabet = chars.every((code) => charTransMap.has(code));
