@@ -3,6 +3,24 @@ import { addTemplate, createResolver, defineNuxtModule, useLogger } from '@nuxt/
 import { string2DoubleStrucks } from './string2double-struck';
 import ELEMENTS from './elements.source';
 
+// ELEMENTS から「元素名 -> ダブルストラック体」のマップを作成
+const buildMap = () => {
+  if (!Array.isArray(ELEMENTS)) {
+    throw new Error(`[elements-gen] ELEMENTS must be an array.`);
+  }
+  const map: Record<string, string> = {};
+
+  // 配列の各要素を変換してマップへ格納
+  for (const [_, name] of ELEMENTS as [string, string][]) {
+    const res = string2DoubleStrucks(name);
+    if (!res.ok) {
+      throw new Error(`[elements-gen] ELEMENTS must be an alphabet!`);
+    }
+    map[name] = res.value;
+  }
+  return map;
+};
+
 // Nuxt モジュールとして登録
 export default defineNuxtModule({
   meta: {
@@ -15,29 +33,11 @@ export default defineNuxtModule({
     const logger = useLogger('elements-gen');
     const { resolve } = createResolver(import.meta.url);
 
-    // ELEMENTS から「元素名 -> ダブルストラック体」のマップを作成
-    const buildMap = async () => {
-      if (!Array.isArray(ELEMENTS)) {
-        throw new Error(`[elements-gen] ELEMENTS must be an array.`);
-      }
-      const map: Record<string, string> = {};
-
-      // 配列の各要素を変換してマップへ格納
-      for (const [_, name] of ELEMENTS as [string, string][]) {
-        const res = string2DoubleStrucks(name);
-        if (!res.ok) {
-          throw new Error(`[elements-gen] ELEMENTS must be an alphabet!`);
-        }
-        map[name] = res.value;
-      }
-      return map;
-    };
-
     // ビルド時に JSON を生成して .nuxt 配下へ出力
     addTemplate({
       filename: 'elements/elements.generated.json',
       getContents: async () => {
-        const map = await buildMap();
+        const map = buildMap();
         const json = JSON.stringify(map, null, 2);
         logger.info(`generated JSON: ${Object.keys(map).length} entries`);
         return json;
