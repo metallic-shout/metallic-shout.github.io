@@ -1,8 +1,9 @@
-// modules/elements-gen/module.ts
+﻿// modules/elements-gen/module.ts
 import { addTemplate, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
 import { string2DoubleStrucks } from './string2double-struck';
 import ELEMENTS from './elements.source';
 
+// Nuxt モジュールとして登録
 export default defineNuxtModule({
   meta: {
     name: 'elements-gen',
@@ -10,15 +11,18 @@ export default defineNuxtModule({
   },
   defaults: {},
   setup(_, nuxt) {
+    // モジュール用のロガーと resolver を準備
     const logger = useLogger('elements-gen');
     const { resolve } = createResolver(import.meta.url);
 
+    // ELEMENTS から「元素名 -> ダブルストラック体」のマップを作成
     const buildMap = async () => {
       if (!Array.isArray(ELEMENTS)) {
         throw new Error(`[elements-gen] ELEMENTS must be an array.`);
       }
       const map: Record<string, string> = {};
 
+      // 配列の各要素を変換してマップへ格納
       for (const [_, name] of ELEMENTS as [string, string][]) {
         const res = string2DoubleStrucks(name);
         if (!res.ok) {
@@ -29,6 +33,7 @@ export default defineNuxtModule({
       return map;
     };
 
+    // ビルド時に JSON を生成して .nuxt 配下へ出力
     addTemplate({
       filename: 'elements/elements.generated.json',
       getContents: async () => {
@@ -39,7 +44,7 @@ export default defineNuxtModule({
       },
     });
 
-    // 使いやすい import パスを提供（#elements で引けるようにする）
+    // #elements エイリアスで生成済み JSON を参照できるようにする
     nuxt.options.alias = nuxt.options.alias || {};
     nuxt.options.alias['#elements'] = resolve(
       nuxt.options.buildDir,
