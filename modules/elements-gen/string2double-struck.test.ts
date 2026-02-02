@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { string2DoubleStrucks } from './string2double-struck';
+import { string2DoubleStrucks } from '../../lib/string2double-struck';
 
 test('アルファベットはダブルストラック体に変換される', () => {
   const res = string2DoubleStrucks('ABa');
@@ -16,4 +16,3 @@ test('アルファベット以外が含まれる場合はエラー', () => {
   assert.equal(res.ok, false);
   assert.equal(res.error.kind, 'ArgStringNotAlphabetError');
 });
-

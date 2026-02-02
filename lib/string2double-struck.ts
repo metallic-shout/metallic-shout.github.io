@@ -1,4 +1,4 @@
-import { err, ok, type IError, type Result } from '../../shared/result-type';
+import { err, ok, type IError, type Result } from '../shared/result-type';
 
 /**
  * 入力にアルファベット以外が含まれている場合に返すエラー。
@@ -15,6 +15,7 @@ const base = 0x1d538;
 
 /**
  * Unicode で連続しない位置を補正するための上書き表。
+ * インデックスは A-Z の 0 始まり。
  */
 const jumps = {
   2: 'ℂ',
@@ -34,12 +35,9 @@ const doubleStrucks = Array.from(Array(52).keys()).map(
 );
 
 /**
- * 'A' の Unicode code point。
+ * 'A' と 'a' の Unicode code point。
  */
 const codeUpperA = 0x41;
-/**
- * 'a' の Unicode code point。
- */
 const codeLowera = 0x61;
 
 /**

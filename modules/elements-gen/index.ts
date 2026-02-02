@@ -1,6 +1,6 @@
 ﻿// modules/elements-gen/module.ts
 import { addTemplate, createResolver, defineNuxtModule, useLogger } from '@nuxt/kit';
-import { string2DoubleStrucks } from './string2double-struck';
+import { string2DoubleStrucks } from '../../lib/string2double-struck';
 import ELEMENTS from './elements.source';
 
 /**
