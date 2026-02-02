@@ -1,8 +1,14 @@
 import { Board } from './board';
 import { string2DoubleStrucks } from './string2double-struck';
 
+/**
+ * 左側ラベル用のプレフィックス（ダブルストラック体）。
+ */
 const prefix = string2DoubleStrucks('Punch  out  the  ');
 
+/**
+ * 左側の装飾ボード。
+ */
 const leftBoard = Board.make4Param(
   `      ${prefix}`,
   9,
@@ -10,6 +16,9 @@ const leftBoard = Board.make4Param(
   (frame) => `◣${frame}`,
 );
 
+/**
+ * 右側の装飾ボード。
+ */
 const rightBoard = Board.make4Param(
   '',
   1,
@@ -17,22 +26,38 @@ const rightBoard = Board.make4Param(
   (frame) => `${frame}◢`,
 );
 
-// 小文字３：フレーム棒２
-// 余りが出たらもう一本
-// 長い単語であればもう一本
+/**
+ * 文字数に応じたフレーム長の比率を計算する。
+ * @param charLength 文字数。
+ * @returns 比率換算したフレーム長。
+ */
 const ratioFrame4chars = (charLength: number) => {
+  // 小文字３：フレーム棒２
   const result = ((charLength / 3) | 0) * 2;
+  // 余りが出たらもう一本
   const remain = charLength % 3 > 0 ? 1 : 0;
+  // 長い単語であればもう一本
   const extender = charLength > 4 ? 1 : 0;
   return result + remain + extender;
 };
 
+/**
+ * 文字数から左右装飾を含むフレーム長を算出する。
+ * @param charLength 文字数。
+ * @returns フレーム長。
+ */
 const getFrameLength = (charLength: number) => {
   const upper = 1;
   const lower = ratioFrame4chars(charLength - 1);
   return upper + lower;
 };
 
+/**
+ * ラベルを左右装飾付きの文字列へ変換する。
+ * @param label 中央の表示文字列。
+ * @param originLength 元の文字数。
+ * @returns 3 行構成の装飾済み文字列。
+ */
 export const makeShout = (label: string, originLength: number) => {
   const frameLength = getFrameLength(originLength);
   const center = Board.make4Param(label, frameLength);
