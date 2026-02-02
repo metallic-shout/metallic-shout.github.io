@@ -6,7 +6,7 @@
       </label>
       <textarea
         id="main-text"
-        class="mt-3 min-h-[180px] w-full resize-y rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
+        class="mt-3 min-h-[11.25rem] w-full resize-y rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
         placeholder="ここにテキストを入力"
       />
       <div class="mt-4 flex justify-end">
