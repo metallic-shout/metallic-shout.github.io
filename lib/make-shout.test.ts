@@ -29,8 +29,8 @@ test('makeShoutの上下行は装飾記号で囲まれる', () => {
   const result = makeShout(label, label.length);
   const [top, , bottom] = result.split('\n');
 
-  assert.equal(top.startsWith('笳､'), true);
-  assert.equal(top.endsWith('笳･'), true);
-  assert.equal(bottom.startsWith('笳｣'), true);
-  assert.equal(bottom.endsWith('笳｢'), true);
+  assert.equal(top.startsWith('◤'), true);
+  assert.equal(top.endsWith('◥'), true);
+  assert.equal(bottom.startsWith('◣'), true);
+  assert.equal(bottom.endsWith('◢'), true);
 });
