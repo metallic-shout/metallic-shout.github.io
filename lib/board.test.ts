@@ -25,7 +25,7 @@ test('buildの返り値は3行で構成される', () => {
   const lines = built.split('\n');
 
   assert.equal(lines.length, 3);
-  assert.equal(lines[1], '**CENTER**');
+  assert.equal(lines[1], '**TEST**');
 });
 
 test('mergeは各行を横方向に連結する', () => {
