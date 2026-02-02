@@ -35,7 +35,7 @@ test('elements-gen モジュールは JSON を生成し、#elements を登録す
 
   const json = await capturedTemplate.getContents();
   const map = JSON.parse(json);
-  assert.equal(map.Lithium, '\u{1D543}\u{1D552}\u{1D55D}\u{1D555}\u{1D55A}\u{1D55E}\u{1D55E}');
+  assert.equal(map.Lithium, '\u{1D543}\u{1D55A}\u{1D565}\u{1D559}\u{1D55A}\u{1D566}\u{1D55E}');
 
   assert.equal(
     nuxt.options.alias['#elements'],
