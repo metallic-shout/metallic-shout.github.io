@@ -12,4 +12,9 @@ export default defineNuxtConfig({
       include: ['../lib/**/*.ts', '../modules/**/*', '../data/**/*'],
     },
   },
+  modules: ['@nuxtjs/tailwindcss'],
+  css: ['~/assets/css/tailwind.css'],
+  tailwindcss: {
+    // configPath / cssPath などを変える時だけ触る
+  },
 });
