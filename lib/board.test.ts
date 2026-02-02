@@ -4,7 +4,9 @@ import test from 'node:test';
 import { Board } from './board';
 
 const unpackBoard = (board: Board) => {
-  const [top, middleWithStars, bottom] = board.build().split('\n');
+  const [top, middleWithStars, bottom] = board
+    .build()
+    .split('\n') as [string, string, string];
   const middle = middleWithStars.replace(/^\*\*/, '').replace(/\*\*$/, '');
   return { top, middle, bottom };
 };
