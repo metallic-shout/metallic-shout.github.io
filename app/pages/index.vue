@@ -27,5 +27,5 @@ import { makeShout } from '~~/lib/make-shout';
 const elementPairs = Object.entries(elements) as [string, string][];
 const randomIndex = Math.floor(Math.random() * elementPairs.length);
 const [name, label] = elementPairs[randomIndex]!;
-const shout = useState('shout', () => makeShout(label, name.length));
+const shout = ref(makeShout(label, name.length));
 </script>
