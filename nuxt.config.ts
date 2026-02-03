@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       include: ['../lib/**/*.ts', '../modules/**/*', '../data/**/*'],
     },
   },
-  modules: ['@nuxtjs/tailwindcss', '@nuxt/icon'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/icon', '@nuxtjs/color-mode'],
   css: ['~/assets/css/tailwind.css'],
   tailwindcss: {
     // configPath / cssPath などを変える時だけ触る
