@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "node --test --import tsx --experimental-test-module-mocks"
+    "test": "vitest run"
   },
   "dependencies": {
     "nuxt": "^4.3.0",

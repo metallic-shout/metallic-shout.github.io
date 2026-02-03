@@ -1,5 +1,4 @@
-import assert from 'node:assert/strict';
-import test from 'node:test';
+import { it, expect } from 'vitest';
 
 import { Board } from './board';
 
@@ -11,24 +10,24 @@ const unpackBoard = (board: Board) => {
   return { top, middle, bottom };
 };
 
-test('buildは中央行を**で囲んだ3行文字列を返す', () => {
+it('buildは中央行を**で囲んだ3行文字列を返す', () => {
   const board = Board.make4Param('CENTER', 3);
   const built = board.build();
-  const lines = built.split('\n');
+  const lines = built.split('\n') as [string, string, string];
 
-  assert.equal(lines.length, 3);
+  expect(lines.length).toBe(3);
 });
 
-test('buildの返り値は3行で構成される', () => {
+it('buildの返り値は3行で構成される', () => {
   const board = Board.make4Param('TEST', 2);
   const built = board.build();
-  const lines = built.split('\n');
+  const lines = built.split('\n') as [string, string, string];
 
-  assert.equal(lines.length, 3);
-  assert.equal(lines[1], '**TEST**');
+  expect(lines.length).toBe(3);
+  expect(lines[1]).toBe('**TEST**');
 });
 
-test('mergeは各行を横方向に連結する', () => {
+it('mergeは各行を横方向に連結する', () => {
   const left = Board.make4Param('L', 2);
   const right = Board.make4Param('R', 2);
   const merged = left.merge(right);
@@ -37,16 +36,16 @@ test('mergeは各行を横方向に連結する', () => {
   const rightParts = unpackBoard(right);
   const mergedParts = unpackBoard(merged);
 
-  assert.equal(mergedParts.top, leftParts.top + rightParts.top);
-  assert.equal(mergedParts.middle, leftParts.middle + rightParts.middle);
-  assert.equal(mergedParts.bottom, leftParts.bottom + rightParts.bottom);
+  expect(mergedParts.top).toBe(leftParts.top + rightParts.top);
+  expect(mergedParts.middle).toBe(leftParts.middle + rightParts.middle);
+  expect(mergedParts.bottom).toBe(leftParts.bottom + rightParts.bottom);
 });
 
-test('make4Paramは指定したフレーム長の上下行を生成する', () => {
+it('make4Paramは指定したフレーム長の上下行を生成する', () => {
   const frameLength = 4;
   const board = Board.make4Param('X', frameLength);
   const { top, bottom } = unpackBoard(board);
 
-  assert.equal(top.length, bottom.length);
-  assert.equal(top.length % frameLength, 0);
+  expect(top.length).toBe(bottom.length);
+  expect(top.length % frameLength).toBe(0);
 });

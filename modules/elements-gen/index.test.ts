@@ -1,27 +1,29 @@
-﻿import assert from 'node:assert/strict';
-import test, { mock } from 'node:test';
+import { it, expect, vi, beforeEach } from 'vitest';
 import path from 'node:path';
 
 type Template = { filename: string; getContents: () => Promise<string> | string };
 type NuxtLike = { options: { buildDir: string; alias: Record<string, string> } };
 type ModuleDef = { setup: (options: unknown, nuxt: NuxtLike) => void };
 
-test('elements-gen モジュールは JSON を生成し、#elements を登録する', async () => {
-  let capturedTemplate: Template | undefined;
+let capturedTemplate: Template | undefined;
 
-  mock.module('@nuxt/kit', {
-    namedExports: {
-      addTemplate: (template: Template) => {
-        capturedTemplate = template;
-      },
-      createResolver: () => ({
-        resolve: (...parts: string[]) => path.join(...parts),
-      }),
-      defineNuxtModule: (moduleDef: unknown) => moduleDef,
-      useLogger: () => ({ info: () => {} }),
-    },
-  });
+vi.mock('@nuxt/kit', () => ({
+  addTemplate: (template: Template) => {
+    capturedTemplate = template;
+  },
+  createResolver: () => ({
+    resolve: (...parts: string[]) => path.join(...parts),
+  }),
+  defineNuxtModule: (moduleDef: unknown) => moduleDef,
+  useLogger: () => ({ info: () => {} }),
+}));
 
+beforeEach(() => {
+  capturedTemplate = undefined;
+  vi.resetModules();
+});
+
+it('elements-gen モジュールは JSON を生成し、#elements を登録する', async () => {
   const mod = await import('./index');
   const moduleDef = mod.default as unknown as ModuleDef;
 
@@ -31,14 +33,15 @@ test('elements-gen モジュールは JSON を生成し、#elements を登録す
   if (!capturedTemplate) {
     throw new Error('template should be registered');
   }
-  assert.equal(capturedTemplate.filename, 'elements/elements.generated.json');
+  expect(capturedTemplate.filename).toBe('elements/elements.generated.json');
 
   const json = await capturedTemplate.getContents();
   const map = JSON.parse(json);
-  assert.equal(map.Lithium, '\u{1D543}\u{1D55A}\u{1D565}\u{1D559}\u{1D55A}\u{1D566}\u{1D55E}');
+  expect(map.Lithium).toBe(
+    '\u{1D543}\u{1D55A}\u{1D565}\u{1D559}\u{1D55A}\u{1D566}\u{1D55E}',
+  );
 
-  assert.equal(
-    nuxt.options.alias['#elements'],
+  expect(nuxt.options.alias['#elements']).toBe(
     path.join('.nuxt', 'elements/elements.generated.json'),
   );
 });
