@@ -21,7 +21,7 @@
 - Framework: Nuxt 4
 - Language: TypeScript
 - Styling: Tailwind CSS
-- Testing: node:test
+- Testing: vitest
 
 エージェントは、この技術スタックが持つ前提・制約を必ず尊重してください。
 
@@ -87,7 +87,7 @@
 
 ---
 
-### 5. テスト方針（node:test）
+### 5. テスト方針（vitest）
 
 - テストは必ず決定論的であること
 - 原則として unit test を優先する
@@ -102,8 +102,10 @@
 例：
 
 ```ts
-test('トークンが期限切れの場合は null を返す', () => {
-  // ...
+descrive('APIクライアント', () => {
+  it('トークンが期限切れの場合は null を返す', () => {
+    // ...
+  });
 });
 ```
 
