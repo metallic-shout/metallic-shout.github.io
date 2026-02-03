@@ -1,19 +1,7 @@
-<script setup lang="ts">
-import elements from '#elements';
-import { makeShout } from '@root/lib/make-shout';
-
-const elementPairs = Object.entries(elements) as [string, string][];
-const randomIndex = Math.floor(Math.random() * elementPairs.length);
-const label = elementPairs[randomIndex]?.[1] ?? '';
-const shout = useState('shout', () => makeShout(label, label.length));
-</script>
-
 <template>
   <section class="mx-auto max-w-3xl">
     <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-      <label class="block text-sm font-medium text-slate-700" for="main-text">
-        Message
-      </label>
+      <label class="block text-sm font-medium text-slate-700" for="main-text"> Message </label>
       <textarea
         id="main-text"
         class="mt-3 min-h-[11.25rem] w-full resize-y rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
@@ -31,3 +19,13 @@ const shout = useState('shout', () => makeShout(label, label.length));
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import elements from '#elements';
+import { makeShout } from '~~/lib/make-shout';
+
+const elementPairs = Object.entries(elements) as [string, string][];
+const randomIndex = Math.floor(Math.random() * elementPairs.length);
+const [name, label] = elementPairs[randomIndex]!;
+const shout = useState('shout', () => makeShout(label, name.length));
+</script>
