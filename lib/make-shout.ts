@@ -1,10 +1,23 @@
 import { Board } from './board';
 import { string2DoubleStrucks } from './string2double-struck';
 
+const makePrefix = () => {
+  const punchRes = string2DoubleStrucks('Punch');
+  const outRes = string2DoubleStrucks('out');
+  const theRes = string2DoubleStrucks('the');
+  if (!punchRes.ok || !outRes.ok || !theRes.ok) {
+    throw new Error('this error should not occurred.');
+  }
+  const punch = punchRes.value;
+  const out = outRes.value;
+  const the = theRes.value;
+  return `${punch}  ${out}  ${the}  `;
+};
+
 /**
  * 左側ラベル用のプレフィックス（ダブルストラック体）。
  */
-const prefix = string2DoubleStrucks('Punch  out  the  ');
+const prefix = makePrefix();
 
 /**
  * 左側の装飾ボード。
