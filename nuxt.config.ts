@@ -12,4 +12,11 @@ export default defineNuxtConfig({
   tailwindcss: {
     // configPath / cssPath などを変える時だけ触る
   },
+  colorMode: {
+    preference: 'system',
+    fallback: 'dark', // system 判定できない場合
+    classSuffix: '',
+    storage: 'localStorage',
+    storageKey: 'color-mode',
+  },
 });
