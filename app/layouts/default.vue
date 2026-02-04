@@ -1,9 +1,11 @@
 <template>
   <div class="min-h-screen min-w-full flex-col bg-background text-foreground">
     <header class="border-b">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div
+        class="w-full flex flex-col items-start gap-3 px-6 md:px-12 py-4 md:flex-row md:items-center"
+      >
         <div class="text-lg font-semibold tracking-tight">Project</div>
-        <nav class="flex items-center gap-6 text-sm">
+        <nav class="flex flex-wrap items-center gap-4 text-sm md:gap-6 justify-end w-full">
           <a class="transition" href="#">Home</a>
           <a class="transition" href="#">Features</a>
           <a class="transition" href="#">Contact</a>
