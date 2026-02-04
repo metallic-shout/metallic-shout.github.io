@@ -22,3 +22,14 @@
   --border: 55 65 81;
   --ring: 96 165 250;
 }
+
+:where(
+  div, section, main, article, aside, nav,
+  header, footer,
+  ul, ol, li,
+  form, fieldset,
+  figure,
+  table, thead, tbody, tfoot, tr, td, th
+) {
+  display: flex;
+}
