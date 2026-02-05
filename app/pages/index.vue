@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import elements from '#elements';
-import { makeShout } from '~~/lib/make-shout';
+import { makeShout } from '#root/lib/make-shout';
 
 const elementPairs = Object.entries(elements) as [string, string][];
 const randomIndex = Math.floor(Math.random() * elementPairs.length);

@@ -1,4 +1,4 @@
-import { err, ok, type IError, type Result } from '../shared/result-type';
+import { err, ok, type IError, type Result } from '#root/shared/result-type';
 
 /**
  * 入力にアルファベット以外が含まれている場合に返すエラー。

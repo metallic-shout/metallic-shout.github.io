@@ -1,8 +1,13 @@
 import { defineVitestConfig } from '@nuxt/test-utils/config';
+import { rootAlias } from './nuxt.config';
 
 export default defineVitestConfig({
   test: {
-    environment: 'nuxt',
-    globals: true,
+    environment: 'node',
+  },
+  resolve: {
+    alias: {
+      ...rootAlias,
+    },
   },
 });
